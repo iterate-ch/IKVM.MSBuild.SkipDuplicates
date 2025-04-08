@@ -14,7 +14,7 @@ jobs:
       - uses: NuGet/setup-nuget@v2
       - uses: microsoft/setup-msbuild@v2
       - name: Pack
-        run: dotnet pack /Restore /bl /p:Configuration=Release /p:Repository={{ github.repository_owner }} /p:Version=${{ github.ref_name }}
+        run: dotnet pack /Restore /bl /p:Configuration=Release /p:Repository=${{ github.repository_owner }} /p:Version=${{ github.ref_name }}
       - uses: actions/upload-artifact@v4
         with:
           name: msbuild.binlog

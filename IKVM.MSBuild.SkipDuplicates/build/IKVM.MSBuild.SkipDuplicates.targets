@@ -1,0 +1,19 @@
+<Project>
+
+    <Target Name="_BeforeCompileSkipDuplicate"
+            Inputs="@(ReferencePathWithRefAssemblies);@(Convert)"
+            Outputs="@(Convert)"
+            BeforeTargets="CompileJava"
+            DependsOnTargets="FindReferenceAssembliesForReferences">
+        <IkvmSkipDuplicateConvert References="@(ReferencePathWithRefAssemblies)"
+                        Convert="@(Convert)">
+            <Output TaskParameter="Filtered"
+                    ItemName="_SkipDuplicateFiltered" />
+        </IkvmSkipDuplicateConvert>
+
+        <ItemGroup>
+            <Convert Remove="@(_SkipDuplicateFiltered)" />
+        </ItemGroup>
+    </Target>
+
+</Project>

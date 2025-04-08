@@ -1,0 +1,10 @@
+<Project>
+
+    <PropertyGroup>
+        <_IKVMMSBuildSkipDuplicates_TaskFolder>$(MSBuildThisFileDirectory)..\tasks\netstandard2.0\</_IKVMMSBuildSkipDuplicates_TaskFolder>
+    </PropertyGroup>
+
+    <UsingTask TaskName="IkvmSkipDuplicateConvert"
+               AssemblyFile="$(_IKVMMSBuildSkipDuplicates_TaskFolder)IKVM.MSBuild.SkipDuplicates.dll"/>
+
+</Project>

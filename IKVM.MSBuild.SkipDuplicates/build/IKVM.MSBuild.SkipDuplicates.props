@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <UsingTask TaskName="IkvmSkipDuplicateConvert"
-               AssemblyFile="$(_IKVMMSBuildSkipDuplicates_TaskFolder)IKVM.MSBuild.SkipDuplicates.dll"
-               TaskFactory="TaskHostFactory" />
+               AssemblyFile="$(_IKVMMSBuildSkipDuplicates_TaskFolder)IKVM.MSBuild.SkipDuplicates.dll" />
 
 </Project>

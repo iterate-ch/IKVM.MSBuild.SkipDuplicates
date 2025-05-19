@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.0.0" PrivateAssets="all" ExcludeAssets="Runtime" />
+        <PackageReference Include="System.Reflection.Metadata" Version="9.0.5" />
     </ItemGroup>
 
     <ItemGroup>

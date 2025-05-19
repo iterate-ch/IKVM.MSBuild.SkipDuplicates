@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -24,22 +25,26 @@ public class IkvmSkipDuplicateConvert : Task
         HashSet<string> resourceJars = new(StringComparer.OrdinalIgnoreCase);
         foreach (var referenceItem in References)
         {
-            Assembly assembly;
+            FileStream fs = null;
             try
             {
-                assembly = Assembly.LoadFile(referenceItem.ItemSpec);
-            }
-            catch
-            {
-                continue;
-            }
-
-            foreach (var item in assembly.GetManifestResourceNames())
-            {
-                if (item.Substring(Math.Max(0, item.LastIndexOf('.'))).Equals(".jar"))
+                fs = File.OpenRead(referenceItem.ItemSpec);
+                using var reader = new PEReader(fs);
+                var metadata = reader.GetMetadataReader();
+                foreach (var resourceHandle in metadata.ManifestResources)
                 {
-                    resourceJars.Add(item);
+                    var resource = metadata.GetManifestResource(resourceHandle);
+                    var name = metadata.GetString(resource.Name);
+                    if (name.Substring(Math.Max(0, name.LastIndexOf('.'))).Equals(".jar"))
+                    {
+                        resourceJars.Add(name);
+                    }
                 }
+            }
+            catch { continue; }
+            finally
+            {
+                fs?.Dispose();
             }
         }
 

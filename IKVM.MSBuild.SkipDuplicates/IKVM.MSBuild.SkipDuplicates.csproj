@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <LangVersion>13</LangVersion>
         <IsPackable>true</IsPackable>
-
+        
         <TargetsForTfmSpecificBuildOutput>
             $(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage
         </TargetsForTfmSpecificBuildOutput>
@@ -13,6 +13,7 @@
         <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
         <GenerateDependencyFile>true</GenerateDependencyFile>
         <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+        <DevelopmentDependency>true</DevelopmentDependency>
     </PropertyGroup>
 
     <ItemGroup>
